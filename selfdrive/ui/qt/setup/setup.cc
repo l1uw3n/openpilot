@@ -11,6 +11,7 @@
 #include <QApplication>
 
 #include "setup.hpp"
+#include "offroad/wifi.hpp"
 
 #ifdef QCOM2
 #include <qpa/qplatformnativeinterface.h>
@@ -78,6 +79,8 @@ QWidget * Setup::network_setup() {
 
   main_layout->addWidget(title_label("Connect to WiFi"), 0, Qt::AlignCenter);
 
+  main_layout->addWidget(new WifiUI());
+
   QPushButton *btn = new QPushButton("Continue");
   main_layout->addWidget(btn);
   QObject::connect(btn, SIGNAL(released()), this, SLOT(nextPage()));
@@ -121,6 +124,8 @@ QWidget * Setup::software_selection() {
 
 QWidget * Setup::downloading() {
   QVBoxLayout *main_layout = new QVBoxLayout();
+
+  // TODO: handle download failed
 
   main_layout->addWidget(title_label("Downloading..."), 0, Qt::AlignCenter);
 
